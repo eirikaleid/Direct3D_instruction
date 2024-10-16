@@ -40,6 +40,7 @@
 
 #include <Windows.h>
 
+
 class Window
 {
 private:
@@ -70,3 +71,5 @@ private:
 	int width, height;
 	HWND hwnd;
 };
+
+#define CHWND_EXCEPT(hr) Window::Exception(__LINE__,__FILE__,hr)

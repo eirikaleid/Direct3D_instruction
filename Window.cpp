@@ -1,4 +1,6 @@
 #include "Window.h"
+#include "resource.h"
+
 
 Window::WindowClass Window::WindowClass::wndClass;
 
@@ -12,7 +14,7 @@ Window::WindowClass::WindowClass() noexcept : hInst(GetModuleHandle(nullptr))
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
 	wc.hInstance = GetInstance();
-	wc.hIcon = nullptr;
+	wc.hIcon = static_cast<HICON>(LoadImage(GetInstance(), MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 32, 32, 0));
 	wc.hCursor = nullptr;
 	wc.hbrBackground = nullptr;
 	wc.lpszMenuName = nullptr;
@@ -38,7 +40,9 @@ HINSTANCE Window::WindowClass::GetInstance() noexcept
 Window::Window(int width, int height, const char* name) noexcept
 {
 	DWORD window_option = WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU;
-	// ÞÜPHE 1
+
+
+
 	hwnd = CreateWindowEx(0, WindowClass::GetName(), name, window_option, 100, 100, width, height, nullptr, nullptr, WindowClass::GetInstance(), nullptr);
 
 	ShowWindow(hwnd, SW_SHOW);
